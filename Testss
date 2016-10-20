@@ -36,5 +36,4 @@
 				}
 			}
 		} else if (eCRA_PersonTotal == eType) {
-			// 累计充值		
-	分支：合并代码   
+			// 累计充值		 
