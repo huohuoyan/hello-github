@@ -34,5 +34,4 @@
 					}	
 				}
 			}
-		} else if (eCRA_PersonTotal == eType) {
-			// 累计充值		
+		} else if (eCRA_PersonTotal == eType) {	
