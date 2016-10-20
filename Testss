@@ -38,3 +38,17 @@
 		} else if (eCRA_PersonTotal == eType) {
 			// 累计充值		
 	分支：合并代码
+	---------------------------------------------------------------
+	auto itFind = m_BossInfo.mpLock.find(m_BossInfo.usMapID);
+	auto itor = m_BossInfo.mpLock.begin();
+	auto itorEnd = m_BossInfo.mpLock.end();
+	if (itFind != itorEnd) {
+		++itFind;
+		// 解锁后面的副本
+		if (itFind != itorEnd) {
+			if (!itFind->second) {
+				pAdapter->DealLock(m_llConsortiaID, pConsortiaBean->ucRepLockIndex + 1);
+				itFind->second = true;			
+			}
+		}		
+	
