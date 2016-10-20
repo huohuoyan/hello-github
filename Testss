@@ -1,4 +1,5 @@
 
+
 	// 同步消息
 	MSG_COMBINEATY_SYNC& msg = *MSG_COMBINEATY_SYNC::getSingleBuf();
 	msg.uiStartTime = m_CombineAtyData.uiStartTime;
