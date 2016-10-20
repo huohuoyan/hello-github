@@ -1,2 +1,15 @@
 
-主干：
+	// 同步消息
+	MSG_COMBINEATY_SYNC& msg = *MSG_COMBINEATY_SYNC::getSingleBuf();
+	msg.uiStartTime = m_CombineAtyData.uiStartTime;
+	msg.uiRechargeNum = playerSerData.uiChargeNum;	
+	msg.unPersonTotalNum = unPersonTotalNum;
+	msg.combineRwdInfo.bReachTotalAccu = m_CombineAtyData.bTotalChargeFlag;
+	msg.combineRwdInfo.unTotalAccu = m_CombineAtyData.uiTotalChargeNum;
+	msg.combineRwdInfo.uiGiftDay = bRegistBeforeServerOpen ? ONEVALUE : (uiPlayerRegistTime - uiServerOpenTime) / eCTV_Day + ONEVALUE;
+	memcpy_s(msg.combineRwdInfo.bHadGetRwd, sizeof(msg.combineRwdInfo.bHadGetRwd), playerSerData.bHadGetRwd, sizeof(playerSerData.bHadGetRwd));
+	memcpy_s(msg.combineRwdInfo.uiHadGetGiftID, sizeof(msg.combineRwdInfo.uiHadGetGiftID), playerSerData.uiHadGetGiftID, sizeof(playerSerData.uiHadGetGiftID));
+	memcpy_s(msg.combineRwdInfo.dailyChargeRwd, sizeof(msg.combineRwdInfo.dailyChargeRwd), playerSerData.dailyChargeRwd, sizeof(playerSerData.dailyChargeRwd));
+	msg.ucLimitFlag = m_CombineAtyData.ucLimitFlag;
+	
+	pPlayer->SyncMsg((const MsgBase&)msg);
