@@ -13,3 +13,26 @@
 	msg.ucLimitFlag = m_CombineAtyData.ucLimitFlag;
 	
 	pPlayer->SyncMsg((const MsgBase&)msg);
+	----------------------------------------
+	if (eCRA_Recharge == eType) {
+			CombineChargeRankAtyPtr pRankAtyInfo = combineAtyCfg.GetRankAtyInfoByID(eType, ucID);
+			if (NULL != pRankAtyInfo) {
+				for (size_t n = 0; n < pRankAtyInfo->vChargeRankRwd.size(); ++n) {
+					const CombineRwdPtr& pRwdInfo = pRankAtyInfo->vChargeRankRwd.at(n);
+					if (NULL != pRwdInfo) {
+						for (unsigned int uiRank = pRwdInfo->uiMin; uiRank <= pRwdInfo->uiMax && uiRank <= eCAC_MaxRank; ++uiRank) {
+							const CombineAtyRankList::_RankKey* pRankKey = m_CombineAtyRankList[eType].GetRankKeyByRanking(uiRank);
+							if (NULL != pRankKey && pRankKey->val.uiChargeNum >= pRankAtyInfo->uiRankChargeNum) {
+								CombineAtyTaskData taskData;
+								taskData.userID = pRankKey->key;
+								taskData.taskType = eCRA_Recharge == eType ? eTT_SendRankRwdMail : eTT_SendConsumRankRwdMail;
+								taskData.ucChargeRankAtyID = ucID;
+								taskData.uiParam = uiRank;
+								m_CombineAtyTaskList.push_back(taskData);	
+							}
+						}
+					}	
+				}
+			}
+		} else if (eCRA_PersonTotal == eType) {
+			// 累计充值		
