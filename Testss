@@ -1,4 +1,5 @@
 
+
 	// 同步消息
 	MSG_COMBINEATY_SYNC& msg = *MSG_COMBINEATY_SYNC::getSingleBuf();
 	msg.uiStartTime = m_CombineAtyData.uiStartTime;
@@ -36,3 +37,4 @@
 			}
 		} else if (eCRA_PersonTotal == eType) {
 			// 累计充值		
+	分支：合并代码
